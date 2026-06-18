@@ -13,7 +13,12 @@ $memcached->set('test_key', 'Hello Memcached!');
 echo $memcached->get('test_key');
 
 try {
-    $pdo = new PDO('pgsql:host=postgres;port=5432;dbname=my_db', 'admin', '12345');
+    $host = 'postgres';
+    $db   = getenv('POSTGRES_DB');
+    $user = getenv('POSTGRES_USER');
+    $pass = getenv('POSTGRES_PASSWORD');
+
+    $pdo = new PDO("pgsql:host=$host;dbname=$db", $user, $pass);
     $stmt = $pdo->query('SELECT version();');
     echo 'Успех! Версия БД: ' . $stmt->fetchColumn();
 } catch (Exception $e) {

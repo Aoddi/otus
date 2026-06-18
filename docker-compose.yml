@@ -18,6 +18,10 @@ services:
       dockerfile: Dockerfile
     image: myapp/php
     container_name: app
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     volumes:
       - ./code:/data/mysite.local
 
@@ -32,19 +36,15 @@ services:
     image: memcached:1.6-alpine
     container_name: memcached_cache
     restart: always
-    ports:
-      - "11211:11211"
 
   postgres:
     image: postgres:16-alpine
     container_name: postgres_db
     restart: always
     environment:
-      POSTGRES_DB: my_db
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: 12345
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     volumes:
       - db_data:/var/lib/postgresql/data
 
