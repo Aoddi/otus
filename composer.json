@@ -1,0 +1,11 @@
+{
+  "name": "otus/main-project",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/Aoddi/test-package"
+    }
+  ]
+}
