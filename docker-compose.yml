@@ -1,0 +1,22 @@
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: myapp/nginx
+    container_name: "nginx"
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/data/mysite.local
+    depends_on:
+      - app
+
+  app:
+    build:
+      context: ./fpm
+      dockerfile: Dockerfile
+    image: myapp/fpm
+    container_name: fpm
+    volumes:
+      - ./src:/data/mysite.local
