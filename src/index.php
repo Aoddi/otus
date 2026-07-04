@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+$_SESSION['counter'] = ($_SESSION['counter'] ?? 0) + 1;
+
+echo "Host: " . gethostname() . PHP_EOL;
+echo "Counter: " . $_SESSION['counter'];
+
 if (!isset($_POST['string']) || trim($_POST['string']) === '') {
     errorResponse();
 }
@@ -31,7 +38,7 @@ errorResponse();
 function successResponse()
 {
     http_response_code(200);
-    echo 'все ок';
+    echo 'все ок! host: ' . gethostname();
     exit();
 }
 
